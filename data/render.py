@@ -105,9 +105,17 @@ class PipelineParams(ParamGroup):
         super().__init__(parser, "Pipeline Parameters")
 
 class GaussianRender:
-    def __init__(self, parser, sh_degree, gaussians_path, white_background, FOV, render_image_size=(1080, 1920)) -> None:
+    def __init__(self, parser, sh_degree, white_background, FOV, render_image_size=(1080, 1920), plydata=None, gaussians_path=None) -> None:
+        # import pdb
+        # pdb.set_trace()
         self.gaussians = GaussianModel(sh_degree)
-        self.gaussians.load_ply(gaussians_path)
+        
+        assert plydata is not None or gaussians_path is not None, "plydata and gaussians_path cannot be both None"
+        if plydata is not None:
+            self.gaussians.process_ply(plydata)
+        else:
+            self.gaussians.load_ply(gaussians_path)
+            
         self.pipeline = PipelineParams(parser)
         bg_color = [1,1,1] if white_background else [0, 0, 0]
         self.background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")

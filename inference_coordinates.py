@@ -140,8 +140,8 @@ if __name__ == "__main__":
     init_scene_args(args=args)
     
     save_path = r"./outputs/inference/demo/coords/{}/".format(args.scene)
-    eyeRealNet_weights = r"weight\model_ckpts\lego_bulldozer.pth"
-    gaussian_path = r'weight\gaussian_ply\lego_bulldozer.ply'
+    eyeRealNet_weights = r"weight/model_ckpts/lego_bulldozer.pth"
+    gaussian_path = r'weight/gaussian_ply/lego_bulldozer.ply'
     mid_coord = [100, 0, 0] 
     os.makedirs(save_path, exist_ok=True)
     load_inference(mid_coord=mid_coord, eyeRealNet_weights=eyeRealNet_weights, 

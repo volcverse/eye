@@ -150,6 +150,8 @@ class EyeRealNet(nn.Module):
         W_w = W * scale_pixel2world
         H_w = H * scale_pixel2world
         
+        import pdb; pdb.set_trace()
+        
         if orientation == "xoy":
             self.coord_screen_world = torch.stack([
                 torch.Tensor([[-W_w/2, H_w/2, z], [W_w/2, H_w/2, z], [-W_w/2, -H_w/2, z], [W_w/2, -H_w/2, z]
